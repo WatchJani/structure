@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 	w "root/tree/word"
-	"time"
 )
 
 func main() {
@@ -24,7 +23,7 @@ func main() {
 
 	//=======================WORD================================
 
-	structure := w.WordCollectorInit(10000)
+	structure := w.WordCollectorInit(27395)
 
 	file, err := os.Open("./test")
 	if err != nil {
@@ -41,10 +40,10 @@ func main() {
 		}
 		structure.Insert(scanner.Text())
 	}
-	start := time.Now()
 
 	// fmt.Println(structure.IsExistPrefix("b"))
-	structure.ReadAllNodes("a")
 
-	fmt.Println(time.Since(start))
+	fmt.Println(structure.ReadAllNodes("ba"))
+
+	fmt.Println(structure.Counter)
 }

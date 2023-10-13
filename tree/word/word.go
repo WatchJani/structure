@@ -11,7 +11,8 @@ type Node struct {
 }
 
 type Tree struct {
-	Memory []*Node
+	Memory  []*Node
+	Counter int
 }
 
 func New() *Node {
@@ -41,6 +42,7 @@ func (t *Tree) Insert(word string) {
 		if _, ok := currentNode.node[char]; !ok {
 			t.Memory = append(t.Memory, New())                      // create new empty node
 			currentNode.InsertNode(char, t.Memory[len(t.Memory)-1]) //on current node add new node with link
+			t.Counter++
 		}
 		currentNode = currentNode.node[char] //switch to next linked node (both if it exists and if it doesn't exist)
 	}
@@ -110,6 +112,10 @@ func (t *Tree) ReadAllNodes(word string) []string {
 	}
 
 	return result
+}
+
+func (t Tree) CounterNode() int {
+	return t.Counter
 }
 
 // func (t *Tree) ReadAllNodes(word string) []string {
