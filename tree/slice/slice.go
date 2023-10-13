@@ -34,5 +34,5 @@ func (t *Tree) Inset(value int) {
 }
 
 func (t *Tree) Read() {
-	
+
 }

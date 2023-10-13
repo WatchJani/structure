@@ -1,8 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"log"
+	"os"
 	w "root/tree/word"
+	"time"
 )
 
 func main() {
@@ -20,10 +24,27 @@ func main() {
 
 	//=======================WORD================================
 
-	structure := w.WordCollectorInit(100)
+	structure := w.WordCollectorInit(10000)
 
-	structure.Insert("arb")
-	structure.Insert("arr")
+	file, err := os.Open("./test")
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	fmt.Println(structure.Memory)
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+
+	for scanner.Scan() {
+		if err := scanner.Err(); err != nil {
+			log.Println(err)
+		}
+		structure.Insert(scanner.Text())
+	}
+	start := time.Now()
+
+	// fmt.Println(structure.IsExistPrefix("b"))
+	structure.ReadAllNodes("a")
+
+	fmt.Println(time.Since(start))
 }
