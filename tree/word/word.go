@@ -12,7 +12,7 @@ type Node struct {
 
 type Tree struct {
 	Memory  []*Node
-	Counter int
+	Counter int //this field is just for testing
 }
 
 func New() *Node {

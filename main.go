@@ -6,6 +6,8 @@ import (
 	"log"
 	"os"
 	w "root/tree/word"
+	"strings"
+	"time"
 )
 
 func main() {
@@ -23,9 +25,9 @@ func main() {
 
 	//=======================WORD================================
 
-	structure := w.WordCollectorInit(27395)
+	structure := w.WordCollectorInit(2629735)
 
-	file, err := os.Open("./test")
+	file, err := os.Open("./1.1million word list.txt")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -38,12 +40,15 @@ func main() {
 		if err := scanner.Err(); err != nil {
 			log.Println(err)
 		}
-		structure.Insert(scanner.Text())
+
+		for _, word := range strings.Fields(scanner.Text()) {
+			structure.Insert(word)
+		}
 	}
 
-	// fmt.Println(structure.IsExistPrefix("b"))
+	start := time.Now()
 
-	fmt.Println(structure.ReadAllNodes("ba"))
+	structure.ReadAllNodes("la")
 
-	fmt.Println(structure.Counter)
+	fmt.Println(time.Since(start))
 }
